@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">AMapTest</string>
+    <string name="language">Language</string>
+    <string name="english">English</string>
+    <string name="chinese">Chinese</string>
+    <string name="zh_map">中文地图</string>
+</resources>
