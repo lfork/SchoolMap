@@ -4,4 +4,12 @@
     <string name="english">English</string>
     <string name="chinese">Chinese</string>
     <string name="zh_map">中文地图</string>
+    <string name="route_search">线路搜索</string>
+    <string name="no_result">没有结果</string>
+    <string name="error_network">网络错误</string>
+    <string name="error_key">错误的key</string>
+    <string name="route_demo">路线搜索</string>
+    <string name="route_truck">驾驶路线</string>
+    <string name="route_distance">路线距离</string>
+    <string name="route_ride">骑行路线</string>
 </resources>

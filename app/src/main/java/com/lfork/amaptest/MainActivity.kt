@@ -18,37 +18,30 @@ import java.text.SimpleDateFormat
 import java.util.*
 import android.app.ProgressDialog
 import android.content.Context
+import android.content.Intent
 import com.amap.api.services.core.LatLonPoint
 import com.amap.api.services.route.*
-import com.lfork.amaptest.util.ToastUtil
+import com.lfork.amaptest.route.RouteActivity
 
 
 class MainActivity : AppCompatActivity(), AMapLocationListener, RouteSearch.OnRouteSearchListener {
-    override fun onDriveRouteSearched(p0: DriveRouteResult?, p1: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
-    override fun onBusRouteSearched(p0: BusRouteResult?, p1: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onRideRouteSearched(p0: RideRouteResult?, p1: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onWalkRouteSearched(p0: WalkRouteResult?, p1: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
+    private var mStartPoint = LatLonPoint(39.942295, 116.335891)//起点，116.335891,39.942295
+    private val mEndPoint = LatLonPoint(39.995576, 116.481288)//终点，116.481288,39.995576
 
     //异步获取定位结果2
     @SuppressLint("SimpleDateFormat", "SetTextI18n")
     override fun onLocationChanged(posittion: AMapLocation?) {
         runOnUiThread {
             val df = SimpleDateFormat("HH:mm:ss")
+            val address = posittion!!.address
+            val time = df.format(Date())
+            mStartPoint = LatLonPoint(posittion.latitude, posittion.longitude)
 
-
-            textView.text = "${posittion?.address} time: ${df.format(Date())}"
+            textView.text = "$address " +
+                    "\ntime: $time" +
+                    "\n起点:" + mStartPoint+
+                    "\n终点:" + mEndPoint
         }
     }
 
@@ -60,7 +53,9 @@ class MainActivity : AppCompatActivity(), AMapLocationListener, RouteSearch.OnRo
         requestPermissions()
         val mapView = findViewById<View>(R.id.map) as MapView
         mapView.onCreate(savedInstanceState)// 此方法必须重写
+
         initSchoolMap(mapView)
+
     }
 
     /**
@@ -69,9 +64,12 @@ class MainActivity : AppCompatActivity(), AMapLocationListener, RouteSearch.OnRo
     private fun initSchoolMap(mapView: MapView) {
         aMap = mapView.map
         aMap.setLocationStyle()
-        aMap.setLocationButtonStyle()
+        aMap.setUI()
         aMap.setEnglishMap()
-
+        aMap.setDefaultMap()
+        aMap.setOnMapClickListener{
+            aMap.setMarker(it)
+        }
         btn_language.setOnClickListener {
             btn_language.text = when (btn_language.text) {
                 resources.getString(R.string.english) -> {
@@ -86,8 +84,11 @@ class MainActivity : AppCompatActivity(), AMapLocationListener, RouteSearch.OnRo
                     resources.getString(R.string.english)
                 }
             }
+        }
 
-
+        btn_route_search.setOnClickListener {
+            val intent = Intent(this, RouteActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -188,4 +189,17 @@ class MainActivity : AppCompatActivity(), AMapLocationListener, RouteSearch.OnRo
 //            mRouteSearch.calculateWalkRouteAsyn(query)// 异步路径规划步行模式查询
 //        }
     }
+
+    override fun onDriveRouteSearched(p0: DriveRouteResult?, p1: Int) {
+    }
+
+    override fun onBusRouteSearched(p0: BusRouteResult?, p1: Int) {
+    }
+
+    override fun onRideRouteSearched(p0: RideRouteResult?, p1: Int) {
+    }
+
+    override fun onWalkRouteSearched(p0: WalkRouteResult?, p1: Int) {
+    }
+
 }

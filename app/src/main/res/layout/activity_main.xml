@@ -38,8 +38,18 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:textAllCaps="false"
-        android:text="@string/english"
+        android:text="@string/zh_map"
         app:layout_constraintBottom_toBottomOf="@+id/map"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btn_route_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:textAllCaps="false"
+        android:text="@string/route_search"
+        app:layout_constraintBottom_toBottomOf="@+id/map"
+        app:layout_constraintEnd_toStartOf="@+id/btn_language" />
 
 </android.support.constraint.ConstraintLayout>

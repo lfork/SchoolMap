@@ -19,7 +19,6 @@ import com.amap.api.services.route.BusPath;
 import com.amap.api.services.route.BusStep;
 import com.amap.api.services.route.RouteBusLineItem;
 import com.amap.api.services.route.RouteRailwayItem;
-import com.amap.map3d.demo.R;
 import com.lfork.amaptest.R;
 
 public class AMapUtil {

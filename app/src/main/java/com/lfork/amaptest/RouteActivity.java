@@ -39,6 +39,8 @@
 //import com.amap.map3d.demo.R;
 //import com.amap.map3d.demo.util.AMapUtil;
 //import com.amap.map3d.demo.util.ToastUtil;
+//import com.lfork.amaptest.util.AMapUtil;
+//import com.lfork.amaptest.util.ToastUtil;
 //
 //import overlay.DrivingRouteOverlay;
 //import overlay.WalkRouteOverlay;
