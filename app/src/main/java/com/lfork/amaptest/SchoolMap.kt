@@ -10,12 +10,7 @@ import com.amap.api.maps.AMap.ENGLISH
 import com.amap.api.maps.AMapOptions
 import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.model.*
-import com.amap.api.services.route.RouteSearch.WalkRouteQuery
-import com.amap.api.services.route.RouteSearch.DriveRouteQuery
-import com.amap.api.services.route.RouteSearch.BusRouteQuery
-import com.amap.api.services.route.RouteSearch
 import com.lfork.amaptest.util.Constants
-import com.lfork.amaptest.util.ToastUtil
 
 
 /**
@@ -23,20 +18,14 @@ import com.lfork.amaptest.util.ToastUtil
  * @author 98620
  * @date 2018/9/17
  */
-object SchoolMap {
-    private val TAG = "Test"
-    //声明AMapLocationClient类对象
 
-    fun setLocationListener(context: Context, listener: AMapLocationListener) {
-        //初始化定位
-        var mLocationClient: AMapLocationClient? = null
-        mLocationClient = AMapLocationClient(context)
-        //设置定位回调监听
-        mLocationClient.setLocationListener(listener)
-        //启动定位
-        mLocationClient.startLocation()
-    }
-
+fun AMap.setLocationListener(context: Context, listener: AMapLocationListener) {
+    //初始化定位
+    val mLocationClient = AMapLocationClient(context)
+    //设置定位回调监听
+    mLocationClient.setLocationListener(listener)
+    //启动定位
+    mLocationClient.startLocation()
 }
 
 fun AMap.setLocationStyle() {
@@ -91,11 +80,16 @@ fun AMap.setDefaultMap() {
 /**
  * 在地图上设置marker
  */
-fun AMap.setMarker(position: LatLng): Marker {
+var marker: Marker? =null
+var endPoint :LatLng? = null
+fun AMap.setMarker(position: LatLng): Boolean {
+    endPoint = position
+    marker?.remove()
     val markerOption = MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.amap_end))
             .position(position)
             .draggable(true)
-    return addMarker(markerOption)
+    marker = addMarker(markerOption)
+    return marker == null
 }
 
 

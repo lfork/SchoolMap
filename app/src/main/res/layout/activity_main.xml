@@ -52,4 +52,14 @@
         app:layout_constraintBottom_toBottomOf="@+id/map"
         app:layout_constraintEnd_toStartOf="@+id/btn_language" />
 
+    <Button
+        android:id="@+id/btn_walk_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:textAllCaps="false"
+        android:text="@string/walk_search"
+        app:layout_constraintBottom_toBottomOf="@+id/map"
+        app:layout_constraintEnd_toStartOf="@+id/btn_route_search" />
+
 </android.support.constraint.ConstraintLayout>

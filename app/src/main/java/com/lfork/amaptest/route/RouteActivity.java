@@ -220,6 +220,7 @@ public class RouteActivity extends Activity implements OnMapClickListener,
 		showProgressDialog();
 		final RouteSearch.FromAndTo fromAndTo = new RouteSearch.FromAndTo(
 				mStartPoint, mEndPoint);
+
 		if (routeType == ROUTE_TYPE_BUS) {// 公交路径规划
 			BusRouteQuery query = new BusRouteQuery(fromAndTo, mode,
 					mCurrentCityName, 0);// 第一个参数表示路径规划的起点和终点，第二个参数表示公交查询模式，第三个参数表示公交查询城市区号，第四个参数表示是否计算夜班车，0表示不计算

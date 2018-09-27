@@ -12,4 +12,5 @@
     <string name="route_truck">驾驶路线</string>
     <string name="route_distance">路线距离</string>
     <string name="route_ride">骑行路线</string>
+    <string name="walk_search">步行路线搜索</string>
 </resources>
