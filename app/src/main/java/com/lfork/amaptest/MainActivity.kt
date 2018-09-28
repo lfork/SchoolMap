@@ -67,6 +67,11 @@ class MainActivity : AppCompatActivity(), AMapLocationListener, RouteSearch.OnRo
         mapView.onCreate(savedInstanceState)// 此方法必须重写
         initSchoolMap(mapView)
         requestPermissions()
+        setCustomPoint()
+    }
+
+    private fun setCustomPoint() {
+        aMap.addCustomPosition(MyPoint())
     }
 
     /**

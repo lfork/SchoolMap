@@ -227,7 +227,7 @@ public class TruckRouteColorfulOverLay extends RouteOverlay{
     private void addLimitMarker(TruckStep step, LatLng latLng) {
 
 //        addStationMarker(new MarkerOptions()
-//                .position(latLng)
+//                .position(position)
 //                .title("\u65B9\u5411:" + driveStep.getAction()
 //                        + "\n\u9053\u8DEF:" + driveStep.getRoad())
 //                .snippet(driveStep.getInstruction()).visible(nodeIconVisible)

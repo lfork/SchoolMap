@@ -64,14 +64,19 @@ fun AMap.setChineseMap() {
     setMapLanguage(CHINESE)
 }
 
+
+/**
+ * 设置默认地图大小
+ */
 fun AMap.setDefaultMap() {
-    val LUJIAZUI = CameraPosition.Builder()
+    val cuit = CameraPosition.Builder()
+            // 16 倍放大
             .target(Constants.CUIT).zoom(16F).bearing(0F).tilt(30F).build()
     val aOptions = AMapOptions()
     aOptions.zoomGesturesEnabled(false)// 禁止通过手势缩放地图
     aOptions.scrollGesturesEnabled(false)// 禁止通过手势移动地图
     aOptions.tiltGesturesEnabled(false)// 禁止通过手势倾斜地图
-    aOptions.camera(LUJIAZUI)
+    aOptions.camera(cuit)
     val cameraUpdate = CameraUpdateFactory.newCameraPosition(aOptions.camera)
     moveCamera(cameraUpdate)
 }
@@ -80,8 +85,8 @@ fun AMap.setDefaultMap() {
 /**
  * 在地图上设置marker
  */
-var marker: Marker? =null
-var endPoint :LatLng? = null
+var marker: Marker? = null
+var endPoint: LatLng? = null
 fun AMap.setMarker(position: LatLng): Boolean {
     endPoint = position
     marker?.remove()
@@ -90,6 +95,15 @@ fun AMap.setMarker(position: LatLng): Boolean {
             .draggable(true)
     marker = addMarker(markerOption)
     return marker == null
+}
+
+
+fun AMap.addCustomPosition(point: MyPoint){
+    val markerOption = MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.headmaster))
+            .position(point.position)
+            .draggable(true)
+            .title(point.name)
+    addMarker(markerOption)
 }
 
 
