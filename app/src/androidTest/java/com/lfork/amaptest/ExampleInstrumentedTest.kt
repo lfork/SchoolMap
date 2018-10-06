@@ -15,10 +15,17 @@ import org.junit.Assert.*
  */
 @RunWith(AndroidJUnit4::class)
 class ExampleInstrumentedTest {
+
+
     @Test
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("com.lfork.amaptest", appContext.packageName)
+        assertEquals("com.lfork.amaptest1", appContext.packageName)
+        //模拟方法调用的返回值，隔离对Android系统的依赖
+
+        System.out.println(appContext.getPackageName());
+
+
     }
 }
