@@ -1,4 +1,4 @@
-package com.lfork.amaptest;
+package com.lfork.amaptest.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -3,6 +3,8 @@ package com.lfork.amaptest;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.lfork.amaptest.util.SharedPreferenceDao;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

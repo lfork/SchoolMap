@@ -1,4 +1,4 @@
-package com.lfork.amaptest
+package com.lfork.amaptest.data
 
 import android.content.Context
 
@@ -10,6 +10,7 @@ import com.amap.api.maps.AMap.ENGLISH
 import com.amap.api.maps.AMapOptions
 import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.model.*
+import com.lfork.amaptest.R
 import com.lfork.amaptest.util.Constants
 
 
@@ -64,19 +65,19 @@ fun AMap.setChineseMap() {
     setMapLanguage(CHINESE)
 }
 
-
+const val LEVEL_DEFAULT = 16F
 /**
  * 设置默认地图大小
  */
 fun AMap.setDefaultMap() {
-    val cuit = CameraPosition.Builder()
+    val cuitCamera = CameraPosition.Builder()
             // 16 倍放大
             .target(Constants.CUIT).zoom(16F).bearing(0F).tilt(30F).build()
     val aOptions = AMapOptions()
     aOptions.zoomGesturesEnabled(false)// 禁止通过手势缩放地图
     aOptions.scrollGesturesEnabled(false)// 禁止通过手势移动地图
     aOptions.tiltGesturesEnabled(false)// 禁止通过手势倾斜地图
-    aOptions.camera(cuit)
+    aOptions.camera(cuitCamera)
     val cameraUpdate = CameraUpdateFactory.newCameraPosition(aOptions.camera)
     moveCamera(cameraUpdate)
 }
@@ -85,6 +86,9 @@ fun AMap.setDefaultMap() {
 /**
  * 在地图上设置marker
  */
+var customPointsInfo = ArrayList<MarkerOptions>(0);
+var customPoints = ArrayList<Marker>(0);
+
 var marker: Marker? = null
 var endPoint: LatLng? = null
 fun AMap.setMarker(position: LatLng): Boolean {
@@ -98,12 +102,35 @@ fun AMap.setMarker(position: LatLng): Boolean {
 }
 
 
-fun AMap.addCustomPosition(point: MyPoint){
+fun AMap.addCustomPosition(point: Point) {
     val markerOption = MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.headmaster))
             .position(point.position)
             .draggable(true)
             .title(point.name)
-    addMarker(markerOption)
+    customPointsInfo.add(markerOption)
+    customPoints.add(addMarker(markerOption))
 }
+
+
+/**
+ * 隐藏自定义点位
+ */
+fun AMap.hidePoints() {
+    customPoints.forEach {
+        it.remove()
+    }
+
+    customPoints.clear()
+}
+
+fun AMap.showPoints() {
+    if (customPoints.size > 0) {
+        return
+    }
+    customPointsInfo.forEach {
+        customPoints.add(addMarker(it))
+    }
+}
+
 
 
