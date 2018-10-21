@@ -86,8 +86,6 @@ fun AMap.setDefaultMap() {
 /**
  * 在地图上设置marker
  */
-var customPointsInfo = ArrayList<MarkerOptions>(0);
-var customPoints = ArrayList<Marker>(0);
 
 var marker: Marker? = null
 var endPoint: LatLng? = null
@@ -101,6 +99,9 @@ fun AMap.setMarker(position: LatLng): Boolean {
     return marker == null
 }
 
+
+var customPointsInfo = ArrayList<MarkerOptions>(0);
+var customPoints = ArrayList<Marker>(0);
 
 fun AMap.addCustomPosition(point: Point) {
     val markerOption = MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.headmaster))

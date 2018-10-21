@@ -20,7 +20,7 @@ interface MapContract {
 
         fun showToast(msg: String)
 
-        fun insertPoint(point: Point)
+        fun insertPoints(points: ArrayList<Point>)
 
         fun clearPoint(point: Point)
 

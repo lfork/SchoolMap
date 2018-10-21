@@ -58,16 +58,14 @@ class MainActivity : AppCompatActivity(), AMapLocationListener, MapContract.View
         buttonInit()
         supportActionBar?.hide()
         MapPresenter(this, this)
-        setCustomPoint()
         requestPermissions()
     }
 
-    private fun setCustomPoint() {
-        insertPoint(Point(zoomLevel = 1, name = "校长办公室", lat = 30.581340423495053, lng = 103.99014429171996, imageUrl = "aaa"))
-
-        insertPoint(Point(zoomLevel = 1, name = "校长办公室", lat = 30.581340423495053, lng = 103.99014429171996, imageUrl = "aaa"))
-
+    override fun onStart() {
+        super.onStart()
+        presenter?.start()
     }
+
 
     private fun initSchoolMapUI(mapView: MapView) {
         aMap = mapView.map
@@ -76,7 +74,10 @@ class MainActivity : AppCompatActivity(), AMapLocationListener, MapContract.View
         aMap.setEnglishMap()
         aMap.setDefaultMap()
         aMap.setOnCameraChangeListener(this)
-        aMap.setOnMapClickListener { aMap.setMarker(it) }
+        aMap.setOnMapClickListener {
+            mEndPoint = LatLonPoint(it.latitude, it.longitude)
+            aMap.setMarker(it)
+        }
 
 
     }
@@ -200,7 +201,7 @@ class MainActivity : AppCompatActivity(), AMapLocationListener, MapContract.View
                     "\n起点:" + mCurrentPosition +
                     "\n终点:" + mEndPoint
 
-            Log.e("Test", textView.text.toString())
+            Log.e("Test1", textView.text.toString())
         }
     }
 
@@ -234,8 +235,14 @@ class MainActivity : AppCompatActivity(), AMapLocationListener, MapContract.View
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun insertPoint(point: Point) {
-        aMap.addCustomPosition(point)
+    override fun insertPoints(points: ArrayList<Point>) {
+        runOnUiThread {
+            points.forEach {
+                Log.d("Test2", it.position .toString())
+                aMap.addCustomPosition(it)
+            }
+        }
+
     }
 
     override fun clearPoint(point: Point) {

@@ -2,12 +2,13 @@ package com.lfork.amaptest.main
 
 import android.content.Context
 import android.util.Log
-import com.amap.api.location.AMapLocation
-import com.amap.api.location.AMapLocationListener
 import com.amap.api.services.core.LatLonPoint
 import com.amap.api.services.core.AMapException
 import com.amap.api.services.route.*
 import com.lfork.amaptest.R
+import com.lfork.amaptest.data.Callback
+import com.lfork.amaptest.data.Point
+import com.lfork.amaptest.data.PointsRepository
 import com.lfork.amaptest.data.RoutePlanner.ROUTE_TYPE_BUS
 import com.lfork.amaptest.data.RoutePlanner.ROUTE_TYPE_CROSSTOWN
 import com.lfork.amaptest.data.RoutePlanner.ROUTE_TYPE_DRIVE
@@ -38,7 +39,16 @@ class MapPresenter(var context: Context?, var view : MapContract.View) :MapContr
     }
 
     private fun getCustomPoints(){
-//        view.insertPoint()
+        PointsRepository.getPoints(object:Callback<ArrayList<Point>>{
+            override fun succeed(data: ArrayList<Point>) {
+                view.insertPoints(data)
+            }
+
+            override fun failed(log: String) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+        })
     }
 
     override fun startRouteSearch(  mStartPoint :LatLonPoint, mEndPoint :LatLonPoint,routeType:Int, mode:Int) {
